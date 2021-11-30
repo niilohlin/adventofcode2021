@@ -1,18 +1,36 @@
-import Shared
 import Days.Day1
 
+import System.IO (readFile)
+import Data.List.Split (splitOn)
 
-verifyDay :: Int -> Int -> IO (Int)
+import qualified Data.List as List
+
+-- Read the day's data and parse it into lists separated by 'separator'
+getData :: String -> (String -> a) -> Int -> IO [a]
+getData separator parser day = do
+    contents <- readFile ("data/day" ++ show day ++ ".txt")
+    return $ map parser (List.init $ splitOn separator contents)
+
+getLineData :: (String -> a) -> Int -> IO [a]
+getLineData = getData "\n"
+
+getLineInt :: Int -> IO [Int]
+getLineInt = getLineData (read :: String -> Int)
+
+getLineString :: Int -> IO [String]
+getLineString = getLineData (read :: String -> String)
+
+verifyDay :: Int -> Int -> IO Int
 verifyDay 1 1 = do
     content <- getLineInt 1
     let solution = day1_1 content
-    putStrLn $ show $ day1_1 content
-    return $ [solution]
+    print $ day1_1 content
+    return solution
 verifyDay 1 2 = do
     content <- getLineInt 1
     let solution = day1_2 content
-    putStrLn $ show $ day1_2 content
-    return $ [solution]
+    print $ day1_2 content
+    return solution
 verifyDay _ _ = undefined
 
 main :: IO ()
