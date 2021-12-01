@@ -4,14 +4,16 @@ import System.IO (readFile)
 import Data.List.Split (splitOn)
 
 import qualified Data.List as List
+import Debug.Trace
 
 -- Read the day's data and parse it into lists separated by 'separator'
-getData :: String -> (String -> a) -> Int -> IO [a]
+getData :: Show a => String -> (String -> a) -> Int -> IO [a]
 getData separator parser day = do
     contents <- readFile ("data/day" ++ show day ++ ".txt")
-    return $ map parser (List.init $ splitOn separator contents)
+    let datas = map parser (List.init $ splitOn separator contents)
+    return datas
 
-getLineData :: (String -> a) -> Int -> IO [a]
+getLineData :: Show a => (String -> a) -> Int -> IO [a]
 getLineData = getData "\n"
 
 getLineInt :: Int -> IO [Int]
@@ -35,6 +37,6 @@ verifyDay _ _ = undefined
 
 main :: IO ()
 main = do
-    _ <- verifyDay 1 1
+    _ <- verifyDay 1 2
     return ()
 
