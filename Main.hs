@@ -4,7 +4,7 @@ import System.IO (readFile)
 import Data.List.Split (splitOn)
 
 import qualified Data.List as List
-import Debug.Trace
+import System.Environment
 
 -- Read the day's data and parse it into lists separated by 'separator'
 getData :: Show a => String -> (String -> a) -> Int -> IO [a]
@@ -25,18 +25,19 @@ getLineString = getLineData (read :: String -> String)
 verifyDay :: Int -> Int -> IO Int
 verifyDay 1 1 = do
     content <- getLineInt 1
-    let solution = day1_1 content
-    print $ day1_1 content
-    return solution
+    return $ day1_1 content
 verifyDay 1 2 = do
     content <- getLineInt 1
-    let solution = day1_2 content
-    print $ day1_2 content
-    return solution
+    return $ day1_2 content
 verifyDay _ _ = undefined
 
 main :: IO ()
 main = do
-    _ <- verifyDay 1 2
+    args <- getArgs
+    case args of
+      [day, part] -> do
+        answer <- verifyDay (read day) (read part)
+        print answer
+      _ -> undefined
     return ()
 
