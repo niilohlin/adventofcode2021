@@ -1,12 +1,13 @@
+module Main where
+
 import Days.Day1
 
 import System.IO (readFile)
 import Data.List.Split (splitOn)
 
 import qualified Data.List as List
-import System.Environment
+import System.Environment (getArgs)
 
--- Read the day's data and parse it into lists separated by 'separator'
 getData :: Show a => String -> (String -> a) -> Int -> IO [a]
 getData separator parser day = do
     contents <- readFile ("data/day" ++ show day ++ ".txt")
