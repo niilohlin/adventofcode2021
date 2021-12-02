@@ -1,6 +1,7 @@
 module Main where
 
 import Days.Day1
+import qualified Days.Day2 as Day2
 
 import System.IO (readFile)
 import Data.List.Split (splitOn)
@@ -30,6 +31,12 @@ verifyDay 1 1 = do
 verifyDay 1 2 = do
     content <- getLineInt 1
     return $ day1_2 content
+verifyDay 2 1 = do
+    content <- getLineData Day2.parse 2
+    return $ Day2.day2_1 content
+verifyDay 2 2 = do
+    content <- getLineData Day2.parse 2
+    return $ Day2.day2_2 content
 verifyDay _ _ = undefined
 
 main :: IO ()
