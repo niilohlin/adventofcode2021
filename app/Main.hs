@@ -2,6 +2,7 @@ module Main where
 
 import Days.Day1
 import qualified Days.Day2 as Day2
+import qualified Days.Day3 as Day3
 
 import System.IO (readFile)
 import Data.List.Split (splitOn)
@@ -22,7 +23,7 @@ getLineInt :: Int -> IO [Int]
 getLineInt = getLineData (read :: String -> Int)
 
 getLineString :: Int -> IO [String]
-getLineString = getLineData (read :: String -> String)
+getLineString = getLineData id
 
 verifyDay :: Int -> Int -> IO Int
 verifyDay 1 1 = do
@@ -37,6 +38,12 @@ verifyDay 2 1 = do
 verifyDay 2 2 = do
     content <- getLineData Day2.parse 2
     return $ Day2.day2_2 content
+verifyDay 3 1 = do
+    content <- getLineString 3
+    return $ Day3.day3_1 content
+verifyDay 3 2 = do
+    content <- getLineString 3
+    return $ Day3.day3_2 content
 verifyDay _ _ = undefined
 
 main :: IO ()
