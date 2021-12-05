@@ -3,6 +3,7 @@ module Main where
 import Days.Day1
 import qualified Days.Day2 as Day2
 import qualified Days.Day3 as Day3
+import qualified Days.Day4 as Day4
 
 import System.IO (readFile)
 import Data.List.Split (splitOn)
@@ -25,6 +26,8 @@ getLineInt = getLineData (read :: String -> Int)
 getLineString :: Int -> IO [String]
 getLineString = getLineData id
 
+
+-- can probably be refactored somehow.
 verifyDay :: Int -> Int -> IO Int
 verifyDay 1 1 = do
     content <- getLineInt 1
@@ -44,7 +47,13 @@ verifyDay 3 1 = do
 verifyDay 3 2 = do
     content <- getLineString 3
     return $ Day3.day3_2 content
-verifyDay _ _ = undefined
+verifyDay 4 1 = do
+    content <- getData "\n\n" id 4
+    return $ Day4.day4_1 content
+verifyDay 4 2 = do
+    content <- getData "\n\n" id 4
+    return $ Day4.day4_2 content
+verifyDay _ _ = error "invalid day/part"
 
 main :: IO ()
 main = do
@@ -53,6 +62,6 @@ main = do
       [day, part] -> do
         answer <- verifyDay (read day) (read part)
         print answer
-      _ -> undefined
+      _ -> error "invalid args"
     return ()
 
