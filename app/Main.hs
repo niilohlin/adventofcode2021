@@ -4,6 +4,7 @@ import Days.Day1
 import qualified Days.Day2 as Day2
 import qualified Days.Day3 as Day3
 import qualified Days.Day4 as Day4
+import qualified Days.Day5 as Day5
 
 import System.IO (readFile)
 import Data.List.Split (splitOn)
@@ -53,6 +54,12 @@ verifyDay 4 1 = do
 verifyDay 4 2 = do
     content <- getData "\n\n" id 4
     return $ Day4.day4_2 content
+verifyDay 5 1 = do
+    content <- getLineData Day5.parse 5
+    return $ Day5.day5_1 content
+verifyDay 5 2 = do
+    content <- getLineData Day5.parse 5
+    return $ Day5.day5_2 content
 verifyDay _ _ = error "invalid day/part"
 
 main :: IO ()
